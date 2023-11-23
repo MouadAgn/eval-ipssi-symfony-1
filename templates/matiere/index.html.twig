@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MatiereController!{% endblock %}
+
+{% block body %}
+
+<div class="container mt-4">
+    <h1>Your Form Title</h1>
+
+    <form method="post" class="mt-4">
+        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+        <div class="form-group">
+            {{ form_errors(form) }}
+
+            <label for="{{ form.nom.vars.id }}" class="control-label">Matiere Name</label>
+            <div class="input-group">
+                {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.coefficient.vars.id }}" class="control-label">Coefficient</label>
+            <div class="input-group">
+                {{ form_widget(form.coefficient, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Inserer</button>
+
+        {{ form_end(form) }}
+    </form>
+
+    {% if matieres is not empty %}
+    <div class="container mt-4">
+        {% for element in matieres %}
+            <div class="col-md-12">
+                <div class="list-group-item list-group-item-action">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"> {{ element.nom }} </h5>
+                            <p class="card-text"> Coefficient: {{ element.coefficient }}</p>
+                            <a href="{{ path('app_edit', {'id': element.id}) }}" class="btn btn-primary">Edit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+
+</div>
+
+{% endblock %}
