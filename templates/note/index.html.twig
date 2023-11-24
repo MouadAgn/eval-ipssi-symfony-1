@@ -1,0 +1,82 @@
+    {% extends 'base.html.twig' %}
+
+    {% block title %}Hello NoteController!{% endblock %}
+
+    {% block body %}
+
+    <div class="container mt-4">
+        <h1 class="mb-4">{{ 'Vos notes'| trans }}</h1>
+
+            <form method="post" class="mt-4">
+                    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+                    <div class="form-group">
+                        {{ form_errors(form) }}
+
+                        <label for="{{ form.note.vars.id }}" class="control-label"><b>{{ 'Matiere'|trans }}</b></label>
+                        <div class="input-group">
+                            {{ form_widget(form.matiere, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.note.vars.id }}" class="control-label"><b>{{ 'Note' | trans }}</b></label>
+                        <div class="input-group">
+                            {{ form_widget(form.note, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">{{ 'Inserer'|trans }}</button><br><br><br>
+
+                    {{ form_end(form) }}
+            </form>
+            
+
+    <!-- your_template.html.twig -->
+    <!-- ... existing code -->
+
+   {% if notes is not empty %}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>{{'Matiere'|trans}}</th>
+                    <th>{{'Note'|trans}}</th>
+                    {% if matieres is not empty %}
+                        <th>{{'Coefficient'|trans}}</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for element in notes %}
+                    <tr>
+                        <td>{{ element.matiere.nom }}</td>
+                        <td>{{ element.note }}</td>
+                        {% if matieres is not empty %}
+                            <td>{{ element.matiere.coefficient }}</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endif %}
+
+
+<!-- Label to display the average number -->
+<label for="averageLabel"><b>{{'Moyenne'|trans}}</b></label>
+
+<!-- Input element for responsiveness -->
+<input type="text" class="form-control mb-8" value="{{ moy }}"  readonly><br><br><br>
+
+
+
+
+
+
+        </div>
+    </div>
+
+
+    {% endblock %}
+

@@ -25,7 +25,7 @@ class Matieres
         message: 'The value {{ value }} is not a valid {{ type }}.',
     )] private ?int $coefficient = null;
 
-    #[ORM\OneToMany(mappedBy: 'matiere', targetEntity: Notes::class)]
+    #[ORM\OneToMany(mappedBy: 'matiere', targetEntity: Notes::class, orphanRemoval: true)]
     private Collection $notes;
 
     public function __construct()
@@ -69,7 +69,7 @@ class Matieres
     {
         return $this->notes;
     }
-
+    
     public function addNote(Notes $note): static
     {
         if (!$this->notes->contains($note)) {

@@ -20,8 +20,10 @@ class Notes
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeImmutable $dates = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $matieres = null;
+    public function __construct()
+    {
+        $this->dates = new \DateTimeImmutable();
+    }
 
     #[ORM\ManyToOne(inversedBy: 'notes')]
     private ?Matieres $matiere = null;
@@ -51,18 +53,6 @@ class Notes
     public function setDates(\DateTimeImmutable $dates): static
     {
         $this->dates = $dates;
-
-        return $this;
-    }
-
-    public function getMatieres(): ?string
-    {
-        return $this->matieres;
-    }
-
-    public function setMatieres(string $matieres): static
-    {
-        $this->matieres = $matieres;
 
         return $this;
     }

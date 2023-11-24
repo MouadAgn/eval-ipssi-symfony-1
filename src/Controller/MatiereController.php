@@ -7,6 +7,7 @@ namespace App\Controller;
 
 use App\Entity\Matieres;
 use App\Form\MatierePageType;
+use App\Form\NotePageType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormView;
@@ -19,7 +20,6 @@ class MatiereController extends AbstractController
     #[Route('/matiere', name: 'app_matiere')]
     public function index(EntityManagerInterface $em, Request $request): Response
     {
-        
         $matieres = $em->getRepository(Matieres::class)->findAll();
         $matiere = new Matieres();
         $form = $this->createForm(MatierePageType::class, $matiere);
@@ -60,16 +60,15 @@ class MatiereController extends AbstractController
     }
 
     #[Route('/delete_matiere/{id}', name: 'app_delete')]
-    public function delete(EntityManagerInterface $em, Request $request, Matieres $matiere): Response
+    public function delete(EntityManagerInterface $em, Matieres $matiere): Response
     {
-       
-        $em->remove($matiere);
-        $em->flush();
-        $this->addFlash('success', 'Catégorie supprimée avec succès.');
+            $em->remove($matiere);
+            $em->flush();
 
+        $this->addFlash('success', 'Matiere deleted successfully.');
+
+        // Redirect to the route that displays the list of Matieres
         return $this->redirectToRoute('app_matiere');
-
-        
     }
 
     
