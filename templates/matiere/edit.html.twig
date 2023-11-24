@@ -22,14 +22,14 @@
                 {{ form_widget(form.coefficient, {'attr': {'class': 'form-control'}}) }}
             </div>
         </div>
-
-        
+<br><br>
+        <button type="submit" class="btn btn-primary">{{ 'Enregistrer'|trans }}</button>
 
         {{ form_end(form) }}
         {# End of Form #}
-<div class="form-group row">
+    <div class="form-group row">
             <div class="col-sm-10 offset-sm-2"><br>
-                <button type="submit" class="btn btn-primary">{{ 'Enregistrer'|trans }}</button>
+                
                 <a href="{{ path('app_delete', {'id': matieres.id}) }}">
                     <button class="btn btn-warning">{{ 'Supprimer'|trans }}</button>
                 </a>
